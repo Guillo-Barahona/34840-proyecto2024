@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-const ItemCount = ({stockItems}) => { 
-    console.log("stock del producto: " + stockItems);
+
+const ItemCount = ({stockItems}) => {
+    //console.log("stock del producto: " + stockItems);
     
     const [contador, setContador] = useState(1);
     const [stock, setStock] = useState(stockItems); // para validar el stock disponible
+
 
     const incrementarStock = () => {
         if (contador < stock){
@@ -17,14 +19,13 @@ const ItemCount = ({stockItems}) => {
         setContador(contador - 1);
     }
 
-    const onAdd = () => {
-        if (contador <= stock) {
-            setStock(stock - contador);
-            setContador(1);
-            console.log("Agregaste: " + contador + " Productos al Carrito!");
-        } else 
-            console.log("out of stock");
-    }
+        const onAdd = () => {
+            if (contador <= stock) {
+                setStock(stock - contador);
+                setContador(1);
+                console.log("Agregaste: " + contador + " Productos al Carrito!");
+            }
+        }
 
 
     return (
@@ -41,7 +42,7 @@ const ItemCount = ({stockItems}) => {
 
                 <div className="row justify-content-center">
                     <div className="col-md-12">
-                        <button className="btn btn-outline-primary" onClick={onAdd}>Agregar al Carrito</button>
+                        <button className="btn btn-outline-primary" onClick={onAdd}>Agregar al Carrito</button>   {/* si vendido tiene valo de true, entonces muestra el obton de 'terminar la compra' y redirige al carrito, si no, se muestra el boton de 'agregar al carrito' */}
                     </div>
                 </div>
             </div>

@@ -3,6 +3,9 @@ import ItemCount from "./ItemCount";
 
 
 const ItemDetail = ({item}) => {
+
+
+
     return (
         <div className="row my-5">
             <div className="col-md-6 offset-md-3 text-center">
@@ -11,7 +14,7 @@ const ItemDetail = ({item}) => {
                 <p>{item.descripcion}</p>
                 <p><b>${item.precio}</b></p>
             </div>
-            <ItemCount stockItems={item.stock}/>
+            <ItemCount stock={item.stock}  />
         </div>
     )
 }
