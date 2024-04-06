@@ -1,32 +1,42 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
+import { Link } from "react-router-dom";
 
 
-const ItemCount = ({stockItems}) => {
-    //console.log("stock del producto: " + stockItems);
+const ItemCount = ({stock, onAdd}) => {
+    //console.log("stock del producto: " + stock);
     
     const [contador, setContador] = useState(1);
-    const [stock, setStock] = useState(stockItems); // para validar el stock disponible
+    const [itemStock, setItemStock] = useState(stock); // para validar el stock disponible
+    const [vendido, setVendido] = useState(false);
 
 
     const incrementarStock = () => {
-        if (contador < stock){
+        if (contador < itemStock){
             setContador(contador + 1);
         }
     }
 
     const decrementarStock = () => {
         if (contador > 1)
-        setContador(contador - 1);
+            setContador(contador - 1);
     }
 
-        const onAdd = () => {
-            if (contador <= stock) {
-                setStock(stock - contador);
-                setContador(1);
-                console.log("Agregaste: " + contador + " Productos al Carrito!");
-            }
-        }
+    const addToCart = (quantity) => {
+        setItemStock(itemStock - quantity)
+        setVendido(true);
+        onAdd(quantity);
+        setContador(1);
+        
+/*             if (contador <= stock) {
+            setStock(stock - contador);
+            setContador(1);
+            console.log("Agregaste: " + contador + " Productos al Carrito!");
+        } */
+    }
 
+    useEffect (() =>{ // se uso para cargar el stock que le llega por parametro, y actualiza el estado del itemStock (sin esto, los contadorews no funcionan porque cargan pas rapido que el state)
+        setItemStock(stock)
+    },[stock]);
 
     return (
         <div className="container text-center">
@@ -42,7 +52,9 @@ const ItemCount = ({stockItems}) => {
 
                 <div className="row justify-content-center">
                     <div className="col-md-12">
-                        <button className="btn btn-outline-primary" onClick={onAdd}>Agregar al Carrito</button>   {/* si vendido tiene valo de true, entonces muestra el obton de 'terminar la compra' y redirige al carrito, si no, se muestra el boton de 'agregar al carrito' */}
+                        {vendido ? <Link to="/cart"><button className="btn btn-outline-primary bg-warning">Finalizar la compra</button></Link> : 
+                        <button className="btn btn-outline-primary" onClick={() => {addToCart(contador)}}>Agregar al Carrito</button>}   {/* si vendido tiene valor de true, entonces muestra el boton de 'terminar la compra' y redirige al carrito, si no, se muestra el boton de 'agregar al carrito' */}
+                        <p className="fw-lighter fst-italic text-secondary">{stock} productos en stock</p>
                     </div>
                 </div>
             </div>

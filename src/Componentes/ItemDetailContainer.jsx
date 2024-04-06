@@ -39,7 +39,7 @@ useEffect(() => {
             console.log('Error!! El producto no se encontro!!');
         }
     })
-},[]);
+},[id]);
 
 
 
