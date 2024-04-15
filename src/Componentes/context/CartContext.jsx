@@ -15,7 +15,7 @@ const CartContextProvider = ({children}) => {
             cart[posicion].quantity += quantity //se modifica la cantidad con la quantity que se le pasa como parametro
             setCart([...cart]) //se modifica (el quantity) y se le manda nuevamente todo lo del cart
         } else {
-            setCart([...cart,{...item, quantity:1}]);   // tira los objetos que habia antes con el [...cart], + lo nuevo (todas las propiedades del objeto con (...item) + la propiedad nueva de quantity)
+            setCart([...cart,{...item, quantity:quantity}]);   // tira los objetos que habia antes con el [...cart], + lo nuevo (todas las propiedades del objeto con (...item) + la propiedad nueva de quantity)
         }
     }
 
@@ -34,11 +34,11 @@ const CartContextProvider = ({children}) => {
     }
 
     const cartTotal = () =>{
-        return cart.reduce((acum, item) => acum += item.quantity)  //manda una funcion, al acumulador se le va sumando el item.quantity ("es una variable de iteracion")
+        return cart.reduce((acum, item) => acum += item.quantity, 0)  //manda una funcion, al acumulador se le va sumando el item.quantity ("es una variable de iteracion")
     }
 
     const sumTotal = () =>{
-        return cart.reduce((acum, item) => acum += item.quantity * item.recio)  // al acumulador se le va sumando el item.quantity ("es una variable de iteracion")
+        return cart.reduce((acum, item) => acum += item.quantity * item.precio, 0)  // al acumulador se le va sumando el item.quantity ("es una variable de iteracion")
     }
 
     return (
