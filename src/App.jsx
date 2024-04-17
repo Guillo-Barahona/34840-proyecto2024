@@ -8,6 +8,8 @@ import ItemDetailContainer from './Componentes/ItemDetailContainer';
 import Error404 from './Componentes/Error404';
 import CartContextProvider from './Componentes/context/CartContext';
 import Cart from './Componentes/Cart';
+import Checkout from './Componentes/Checkout';
+import Header from './Componentes/Header';
 
 
 
@@ -15,8 +17,9 @@ import Cart from './Componentes/Cart';
 function App() {
   return (
     <CartContextProvider>
-      <div className="App container-fluid">
+      <div className="App">
         <BrowserRouter>
+          <Header/>
           <NavBar/>
 
             <Routes>
@@ -24,6 +27,7 @@ function App() {
               <Route path={"/category/:id"} element={<ItemListContainer/>}/>
               <Route path={"/item/:id"} element={<ItemDetailContainer/>}/>
               <Route path={"/cart"} element={<Cart/>}/>
+              <Route path={"/checkout"} element={<Checkout/>}/>
               <Route path={"*"} element={<Error404/>}/>
             </Routes>
           

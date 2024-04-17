@@ -8,7 +8,7 @@ const Footer = () => {
                 <hr />
                 <div className="row">
                     <div className="col-md-6">
-                        <img src={"/images/408272957_778840924256438_893742207972305777_n.jpg"} alt={"Roloza Footer"} width={80} />
+                        <img src={"/images/LogoBlancoRojo.svg"} alt={"Dipay Footer"} width={80} />
                     </div>
                     <div className="col-md-6 text-end">
                         <p>
