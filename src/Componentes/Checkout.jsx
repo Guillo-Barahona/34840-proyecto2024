@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "./context/CartContext";
-import { addDoc, collection, doc, getFirestore, updateDoc, writeBatch } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { Navigate } from "react-router-dom";
 
 const Checkout = ()=> {
     const {cart, clearCart, sumTotal, cartTotal} = useContext(CartContext);
-    const [nombre, setNombre] = useState("");
+    const [nombre, setNombre] = useState(""); 
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
     const [orderId, setOrderId] = useState("");
@@ -23,20 +24,6 @@ const Checkout = ()=> {
         const ordersCollection = collection(db, "orders");
         addDoc(ordersCollection, order).then((snapShot) => {
             setOrderId(snapShot.id);
-            const orderDoc = doc(db, "orders", snapShot.id); //Buscar un Documento por ID
-            updateDoc(orderDoc, {total: order.total * 0.9}); //Actualizar un Documento
-
-            // Batch de actualización
-            /* const batch = writeBatch(db);
-            const doc1 = doc(db, "orders", snapShot.id);
-            const doc2 = doc(db, "orders", "VQToooqzITdIzMn4DVIu");
-            const doc3 = doc(db, "orders", "j4a33eWXEBJePoeFCdFb");
-
-            batch.update(doc1, {quantity:0});
-            batch.update(doc2, {quantity:0});
-            batch.update(doc3, {quantity:0});
-            batch.set(doc3, {total: 10000});
-            batch.commit(); */
             clearCart();
         });
     }
@@ -47,15 +34,15 @@ const Checkout = ()=> {
                 <div className="col">
                     <form>
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
+                            <label htmlFor="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" placeholder="Ingrese su Nombre" onInput={(e) => {setNombre(e.target.value)}} />
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label htmlFor="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" placeholder="Ingrese su Email" onInput={(e) => {setEmail(e.target.value)}} />
                         </div>
                         <div class="mb-3">
-                            <label for="telefono" class="form-label">Teléfono</label>
+                            <label htmlFor="telefono" class="form-label">Teléfono</label>
                             <input type="text" class="form-control" id="telefono" placeholder="Ingrese su Teléfono" onInput={(e) => {setTelefono(e.target.value)}} />
                         </div>
                         <button type="button" onClick={generarOrden} class="btn fondoNaranja">Generar Orden</button>
@@ -82,10 +69,7 @@ const Checkout = ()=> {
             </div>
             <div className="row my-5">
                 <div className="col text-center">
-                    {orderId ? <div class="alert alert-success" role="alert">
-                        <h1>Felicitaciones!</h1>
-                        <p>Tu Número de Orden es: {orderId}</p>
-                    </div> : ""}
+                    {orderId ? <Navigate to={"/thankyou/" + orderId}/> : ""}
                 </div>
             </div>
         </div>

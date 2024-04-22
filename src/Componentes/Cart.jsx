@@ -3,7 +3,7 @@ import {CartContext} from "./context/CartContext";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-    const {cart, removeItem, clear, cartTotal, sumTotal} = useContext(CartContext);
+    const {cart, removeItem, clearCart, cartTotal, sumTotal} = useContext(CartContext);
 
     if (cartTotal() === 0) {
         return (
@@ -25,7 +25,7 @@ const Cart = () => {
                     <table className="table">
                         <thead>
                             <tr>
-                            <th scope="col" className="text-end" colSpan={5}><Link onClick={clear} className="btn fondoNaranja" title="Vaciar Carrito">Vaciar Carrito</Link></th>
+                            <th scope="col" className="text-end" colSpan={5}><Link onClick={clearCart} className="btn fondoNaranja" title="Vaciar Carrito">Vaciar Carrito</Link></th>
                             </tr>
                             <tr>
                                 <th scope="col">&nbsp;</th>

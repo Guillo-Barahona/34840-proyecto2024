@@ -10,6 +10,7 @@ import CartContextProvider from './Componentes/context/CartContext';
 import Cart from './Componentes/Cart';
 import Checkout from './Componentes/Checkout';
 import Header from './Componentes/Header';
+import ThankYou from './Componentes/ThankYou';
 
 
 
@@ -28,6 +29,7 @@ function App() {
               <Route path={"/item/:id"} element={<ItemDetailContainer/>}/>
               <Route path={"/cart"} element={<Cart/>}/>
               <Route path={"/checkout"} element={<Checkout/>}/>
+              <Route path={"/thankyou/:id"} element={<ThankYou/>}/>
               <Route path={"*"} element={<Error404/>}/>
             </Routes>
           
